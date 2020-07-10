@@ -1,16 +1,21 @@
 function statement(invoice, plays) {
-    const statementData = {};
-    statementData.customer = invoice.customer;
-    statementData.performances = invoice.performances.map(enrichPerformance);
-    return renderPlainText(statementData, plays);
+    return renderPlainText(createStatementData(invoice, plays));
+
+    function createStatementData(invoice, plays) {
+        const statementData = {};
+        statementData.customer = invoice.customer;
+        statementData.performances = invoice.performances.map(enrichPerformance);
+        statementData.totalVolumeCredits = totalVolumeCredits(statementData);
+        statementData.totalAmount = totalAmount(statementData);
+        return statementData;
+    }
 
     function enrichPerformance(aPerformance) {
         const result = Object.assign({}, aPerformance);
         result.play = playFor(result);
         result.amount = amountFor(result);
         result.volumeCredits = volumeCreditsFor(result);
-        result.totalVolumeCredits = totalVolumeCredits(statementData);
-        result.totalAmount = totalAmount(statementData);
+        
         return result;
     }
 
@@ -58,7 +63,7 @@ function statement(invoice, plays) {
 
 }
 
-function renderPlainText(data, plays) {
+function renderPlainText(data) {
     let result = '청구 내역 (고객명: ${data.customer})\n';
 
     for (let perf of data.performances) {
