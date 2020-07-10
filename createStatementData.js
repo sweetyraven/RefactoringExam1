@@ -51,26 +51,8 @@ function playFor(aPerformance) {
     return plays[aPerformance.playID];
 }
 
-function amountFor(aPerformance) {
-    let result = 0;
-    switch (playFor(aPerformance).type) {
-        case "tregedy": // 비극
-            result = 40000;
-            if (aPerformance.audience > 30) {
-                result += 1000 * (aPerformance.audience - 30);
-            }
-            break;
-        case "comedy": //희극
-            result = 30000;
-            if (aPerformance.audience > 20) {
-                result += 10000 + 500 * (aPerformance.audience - 20);
-            }
-            result += 300 * aPerformance.audience;
-            break;
-        default:
-            throw new Error('알 수 없는 장르: ${playFor(aPerformance).type}');
-    }
-    return result;
+function amountFor(aPerformance) { 
+    return new PerformanceCalculator(aPerformance, playFor(aPerformance)).amount;
 }
 
 function volumeCreditsFor(aPerformance) {
