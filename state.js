@@ -1,8 +1,18 @@
 function statement(invoice, plays) {
     const statementData = {};
     statementData.customer = invoice.customer;
-    statementData.performances = invoice.performances;
+    statementData.performances = invoice.performances.map(enrichPerformance);
     return renderPlainText(statementData, plays);
+
+    function enrichPerformance(aPerformance) {
+        const result = Object.assign({}, aPerformance);
+        result.play = playFor(result);
+        return result;
+    }
+
+    function playFor(aPerformance) {
+        return plays[aPerformance.playID];
+    }
 }
 
 
@@ -11,7 +21,7 @@ function renderPlainText(data, plays) {
 
     for (let perf of data.performances) {
         // 청구 내역을 출력한다.
-        result += '   ${playFor(perf).name}: ${usd(thisAmmount/100)} ($perf.audience}석)\n';
+        result += '   ${perf.play.name}: ${usd(thisAmmount/100)} ($perf.audience}석)\n';
     }
 
     result += '총액: ${format(totalAmount()/100)}\n';
@@ -69,9 +79,5 @@ function renderPlainText(data, plays) {
                 throw new Error('알 수 없는 장르: ${playFor(aPerformance).type}');
         }
         return result;
-    }
-
-    function playFor(aPerformance) {
-        return plays[perf.playID];
     }
 }
