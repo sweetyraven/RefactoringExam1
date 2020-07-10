@@ -37,6 +37,24 @@ class PerformanceCalculator{
 
 }
 
+class TregedyCalculator extends PerformanceCalculator {
+
+}
+
+class ComedyCalculator extends PerformanceCalculator {
+    
+}
+
+function createPerformanceCalculator(aPerformance, aPlay) {
+    switch(aPlay.type)
+    {
+        case "tregedy": return new TregedyCalculator(aPerformance, aPlay);
+        case "comedy": return new ComedyCalculator(aPerformance, aPlay);
+        default:
+            throw new Error('알 수 없는 장르: ${aPlay.type');
+    }
+}
+
 function createStatementData(invoice, plays) {
     const statementData = {};
     statementData.customer = invoice.customer;
@@ -56,9 +74,6 @@ function enrichPerformance(aPerformance) {
     return result;
 }
 
-    function createPerformanceCalculator(aPerformance, aPlay) {
-        return new PerformanceCalculator(aPerformance, aPlay);
-    }
 
 function playFor(aPerformance) {
     return plays[aPerformance.playID];
