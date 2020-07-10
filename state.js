@@ -1,17 +1,27 @@
 function statement(invoice, plays) {
     let totalAmount = 0;
-    let volumeCredits = 0;
     let result = '청구 내역 (고객명: ${invoice.customer})\n';
 
     for(let perf of invoice.performances) {
-        volumeCredits += volumeCreditsFor(perf);
+        
 
         // 청구 내역을 출력한다.
         result += '   ${playFor(perf).name}: ${usd(thisAmmount/100)} ($perf.audience}석)\n';
         totalAmount += amountFor(perf);
-        result += '총액: ${format(totalAmount/100)}\n';
-        result += '적립 포인트: ${volumeCredits}점\n';
-        return result;
+       
+    }
+
+    result += '총액: ${format(totalAmount/100)}\n';
+    result += '적립 포인트: ${totalVolumeCredits()}점\n';
+    return result;
+
+    function totalVolumeCredits() {
+        let volumeCredits = 0;
+        for (let perf of invoice.performances) {
+            volumeCredits += volumeCreditsFor(perf);
+        }
+
+        return volumeCredits;
     }
 
     function usd(aNumber){
