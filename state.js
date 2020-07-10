@@ -6,14 +6,18 @@ function statement(invoice, plays) {
         result += '   ${playFor(perf).name}: ${usd(thisAmmount/100)} ($perf.audience}석)\n';
     }
 
-    let totalAmount = 0;
-    for(let perf of invoice.performances) {
-        totalAmount += amountFor(perf);
-    }
+    let totalAmount = appleSource();
 
     result += '총액: ${format(totalAmount/100)}\n';
     result += '적립 포인트: ${totalVolumeCredits()}점\n';
     return result;
+
+    function appleSource() {
+        let totalAmount = 0;
+        for (let perf of invoice.performances) {
+            totalAmount += amountFor(perf);
+        }
+    }
 
     function totalVolumeCredits() {
         let volumeCredits = 0;
