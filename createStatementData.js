@@ -41,7 +41,7 @@ function enrichPerformance(aPerformance) {
     const calculator = new PerformanceCalculator(aPerformance, playFor(aPerformance));
     const result = Object.assign({}, aPerformance);
     result.play = calculator.play;
-    result.amount = amountFor(result);
+    result.amount = calculator.amount;
     result.volumeCredits = volumeCreditsFor(result);
     
     return result;
@@ -49,10 +49,6 @@ function enrichPerformance(aPerformance) {
 
 function playFor(aPerformance) {
     return plays[aPerformance.playID];
-}
-
-function amountFor(aPerformance) { 
-    return new PerformanceCalculator(aPerformance, playFor(aPerformance)).amount;
 }
 
 function volumeCreditsFor(aPerformance) {
