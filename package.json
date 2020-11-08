@@ -1,0 +1,22 @@
+{
+  "name": "refactoringexam",
+  "version": "1.0.0",
+  "description": "",
+  "main": "createStatementData.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sweetyraven/RefactoringExam1.git"
+  },
+  "author": "plus",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sweetyraven/RefactoringExam1/issues"
+  },
+  "homepage": "https://github.com/sweetyraven/RefactoringExam1#readme",
+  "devDependencies": {
+    "jest": "^26.6.3"
+  }
+}
