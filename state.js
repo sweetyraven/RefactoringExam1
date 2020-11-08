@@ -35,10 +35,11 @@ function statement(invoice, plays) {
         // 청구 내역을 출력한다.
         result += `   ${play.name}: ${format(thisAmount/100)} (${perf.audience}석)\n`;
         totalAmount += thisAmount;
-        result += `총액: ${format(totalAmount/100)}\n`;
-        result += `적립 포인트: ${volumeCredits}점\n`;
-        return result;
     }
+
+    result += `총액: ${format(totalAmount/100)}\n`;
+    result += `적립 포인트: ${volumeCredits}점\n`;
+    return result;
 }
 
 module.exports = statement;
